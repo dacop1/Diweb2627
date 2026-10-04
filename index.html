@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- 
+  DOCTYPE: le dice al navegador que este documento es HTML5.
+  Siempre va en la primera línea.
+-->
+<html lang="es">
+<!-- lang="es": indica el idioma. Ayuda a lectores de pantalla y buscadores. -->
+
+<head>
+  <!-- HEAD: información sobre la página que NO se ve en pantalla -->
+
+  <!-- Codificación de caracteres: necesaria para tildes y la ñ -->
+  <meta charset="UTF-8">
+
+  <!-- Hace que la web se adapte al ancho del móvil (lo usarás mucho con CSS luego) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Descripción que aparece en Google debajo del título -->
+  <meta name="description" content="Cuaderno de prácticas de la asignatura de Diseño Web.">
+
+  <!-- Autor de la página: cambia por tu nombre -->
+  <meta name="author" content="TU NOMBRE">
+
+  <!-- Título que sale en la pestaña del navegador -->
+  <title>Cuaderno de prácticas · Diseño Web</title>
+
+  <!-- AQUÍ irá el enlace a tu CSS más adelante:
+       <link rel="stylesheet" href="css/estilos.css"> -->
+</head>
+
+<body>
+  <!-- BODY: todo lo que se ve en pantalla -->
+
+  <!-- ============================================================
+       CABECERA: <header> agrupa el título principal de la página
+       ============================================================ -->
+  <header>
+    <!-- H1: solo UNO por página. Es el título más importante -->
+    <h1>Cuaderno de prácticas</h1>
+    <p>Diseño Web · Curso 2026/2027</p>
+
+    <!-- <address> es la etiqueta semántica para datos de contacto del autor -->
+    <address>
+      Por <strong>TU NOMBRE</strong> ·
+      <a href="https://github.com/TU-USUARIO">Mi perfil de GitHub</a>
+    </address>
+  </header>
+
+  <hr>
+  <!-- <hr>: línea horizontal que separa temáticamente. Etiqueta vacía (sin cierre). -->
+
+  <!-- ============================================================
+       NAVEGACIÓN: <nav> es para bloques de enlaces principales.
+       Los enlaces que empiezan por # llevan a una sección de ESTA
+       misma página (la que tenga ese id).
+       ============================================================ -->
+  <nav aria-label="Índice de unidades">
+    <h2>Índice</h2>
+    <ol>
+      <li><a href="#unidad-1">HTML básico</a></li>
+      <li><a href="#unidad-2">Listas, tablas y formularios</a></li>
+      <li><a href="#unidad-3">Próximamente: CSS</a></li>
+    </ol>
+  </nav>
+
+  <hr>
+
+  <!-- ============================================================
+       CONTENIDO PRINCIPAL: <main> solo UNO por página.
+       ============================================================ -->
+  <main>
+
+    <!-- ---------- UNIDAD 1 ----------
+         <section> agrupa contenido con un tema. Lleva un id para
+         poder enlazarlo desde el índice de arriba.
+         <details> crea un desplegable SIN JavaScript:
+         el <summary> siempre se ve y al hacer clic se abre el resto.
+         El atributo "open" lo deja abierto por defecto. -->
+    <section id="unidad-1">
+      <details open>
+        <summary><h2>Unidad 1 · HTML básico</h2></summary>
+
+        <!-- <ol> = lista ordenada (numerada). Cada ejercicio es un <li> -->
+        <ol>
+          <li>
+            <!-- target="_blank" abre en pestaña nueva.
+                 rel="noopener noreferrer" es recomendable por seguridad con _blank -->
+            <a href="https://github.com/TU-USUARIO/REPOSITORIO/tree/main/ejercicio-01"
+               target="_blank" rel="noopener noreferrer">
+              Ejercicio 1: Mi primera página
+            </a>
+            <!-- <small>: texto secundario. <time>: fecha legible por máquinas -->
+            <small>— entregado el <time datetime="2026-10-10">10/10/2026</time></small>
+          </li>
+          <li>
+            <a href="https://github.com/TU-USUARIO/REPOSITORIO/tree/main/ejercicio-02"
+               target="_blank" rel="noopener noreferrer">
+              Ejercicio 2: Títulos y párrafos
+            </a>
+            <small>— <time datetime="2026-10-17">17/10/2026</time></small>
+          </li>
+          <li>
+            <a href="https://github.com/TU-USUARIO/REPOSITORIO/tree/main/ejercicio-03"
+               target="_blank" rel="noopener noreferrer">
+              Ejercicio 3: Enlaces e imágenes
+            </a>
+            <small>— <time datetime="2026-10-24">24/10/2026</time></small>
+          </li>
+        </ol>
+      </details>
+    </section>
+
+    <!-- ---------- UNIDAD 2 ---------- -->
+    <section id="unidad-2">
+      <details>
+        <summary><h2>Unidad 2 · Listas, tablas y formularios</h2></summary>
+
+        <!-- start="4": la numeración continúa donde acabó la unidad anterior -->
+        <ol start="4">
+          <li>
+            <a href="https://github.com/TU-USUARIO/REPOSITORIO/tree/main/ejercicio-04"
+               target="_blank" rel="noopener noreferrer">
+              Ejercicio 4: Listas anidadas
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/TU-USUARIO/REPOSITORIO/tree/main/ejercicio-05"
+               target="_blank" rel="noopener noreferrer">
+              Ejercicio 5: Tablas
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/TU-USUARIO/REPOSITORIO/tree/main/ejercicio-06"
+               target="_blank" rel="noopener noreferrer">
+              Ejercicio 6: Formulario de contacto
+            </a>
+          </li>
+        </ol>
+      </details>
+    </section>
+
+    <!-- ---------- UNIDAD 3 ----------
+         Aún sin ejercicios: dejamos el hueco preparado -->
+    <section id="unidad-3">
+      <details>
+        <summary><h2>Unidad 3 · CSS</h2></summary>
+        <p><em>Aún sin ejercicios. Se irán añadiendo aquí.</em></p>
+
+        <!-- PLANTILLA para copiar y pegar un ejercicio nuevo:
+        <ol>
+          <li>
+            <a href="https://github.com/TU-USUARIO/REPOSITORIO/tree/main/ejercicio-XX"
+               target="_blank" rel="noopener noreferrer">
+              Ejercicio XX: Título
+            </a>
+          </li>
+        </ol>
+        -->
+      </details>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- ============================================================
+       PIE DE PÁGINA: <footer> suele llevar autoría, enlaces útiles, etc.
+       ============================================================ -->
+  <footer>
+    <p>
+      Todo el código está en
+      <a href="https://github.com/TU-USUARIO/REPOSITORIO" target="_blank" rel="noopener noreferrer">mi repositorio de GitHub</a>.
+    </p>
+    <!-- &copy; es una "entidad HTML": se muestra como © -->
+    <p><small>&copy; 2026 TU NOMBRE · Diseño Web</small></p>
+
+    <!-- href="#top" es un atajo del navegador: sube al inicio de la página -->
+    <p><a href="#top">Volver arriba</a></p>
+  </footer>
+
+  <!-- AQUÍ irá el JavaScript más adelante:
+       <script src="js/main.js"></script> -->
+</body>
+</html>
