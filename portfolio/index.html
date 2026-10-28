@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- PERSONALIZA: título que aparece en la pestaña del navegador -->
+<title>Cuaderno de ejercicios de diseño web</title>
+<!-- FUENTES: si eliges otras en Google Fonts, pega aquí su <link> y cambia los nombres en las variables --display, --body y --hand de style.css -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Caveat:wght@500;700&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- PERSONALIZA: texto de ayuda que aparece sobre el cuaderno (puedes borrarlo) -->
+<p class="hint">Haz clic en la portada o usa las flechas del teclado para pasar las páginas.</p>
+<div class="stage" id="stage"><div class="book closed" id="book"></div></div>
+<nav class="controls" aria-label="Pasar páginas">
+  <button class="btn" id="prev" type="button">Anterior</button>
+  <span id="pos" aria-live="polite"></span>
+  <button class="btn" id="next" type="button">Siguiente</button>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>

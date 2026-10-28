@@ -1,0 +1,147 @@
+/* ============================================================
+   GUÍA RÁPIDA DE PERSONALIZACIÓN
+   1. Colores y fuentes  → variables de :root (aquí abajo). Con eso cambias casi todo.
+   2. Tamaño del cuaderno → --pw (ancho de una página) y --ph (alto).
+   3. Velocidad del giro  → --flip.
+   4. Tipo de papel       → sección "Papel cuadriculado".
+   5. Aspecto de la tapa  → sección "Tapa".
+   Los textos y los ejercicios NO están aquí: están en script.js.
+   ============================================================ */
+
+:root{
+  /* ---- COLORES (cámbialos por los de tu paleta) ---- */
+  --cover:#1f4d3f;   /* tapa del cuaderno y botones */
+  --brass:#b08d57;   /* esquinas metálicas, cinta adhesiva y subrayador */
+  --paper:#eef2e6;   /* color del papel */
+  --line:#b9cdb8;    /* líneas de la cuadrícula */
+  --ink:#1b2a24;     /* color del texto y de los bordes */
+  --margin:#c8423b;  /* línea roja del margen y foco del teclado */
+
+  /* ---- FUENTES (si cambias una, cambia también el <link> de Google Fonts en index.html) ---- */
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif; /* títulos */
+  --body:"Figtree","Segoe UI",system-ui,sans-serif;                 /* texto normal */
+  --hand:"Caveat","Segoe Print",cursive;                            /* notas a mano y números de página */
+
+  /* ---- TAMAÑO: ancho de una página (mínimo, ideal, máximo) y su alto ---- */
+  --pw:clamp(260px,42vw,440px);
+  --ph:clamp(520px,calc(var(--pw)*1.38),620px);
+
+  /* ---- ANIMACIÓN: duración del giro (usa segundos, p. ej. .6s o 1.2s) y su curva ---- */
+  --flip:.9s;
+  --ease:cubic-bezier(.45,.05,.25,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:1.25rem; padding:1.5rem 0 2rem; overflow-x:hidden;
+  font-family:var(--body); color:var(--ink);
+  background:radial-gradient(ellipse at 50% 35%,#e8ece8,#c2cac4);
+}
+:focus-visible{outline:3px solid var(--margin); outline-offset:2px; border-radius:4px}
+.hint{margin:0; font-size:.95rem; color:#3d5047; text-align:center; padding-inline:1rem}
+
+/* Libro 3D · "perspective" controla la profundidad: más bajo = efecto 3D más exagerado */
+.stage{perspective:2600px; width:100%; display:flex; justify-content:center}
+.book{position:relative; width:calc(var(--pw)*2); height:var(--ph); transition:transform var(--flip) var(--ease)}
+.book.closed{transform:translateX(calc(var(--pw)*-.5))}
+.book.end{transform:translateX(calc(var(--pw)*.5))}
+.leaf{
+  position:absolute; top:0; left:50%; width:50%; height:100%;
+  transform-origin:left center; transform-style:preserve-3d;
+  transition:transform var(--flip) var(--ease),z-index 0s calc(var(--flip)/2);
+}
+.leaf.flipped{transform:rotateY(-180deg)}
+.face{position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden}
+.face.back{transform:rotateY(180deg)}
+
+/* Papel cuadriculado
+   · Tamaño del cuadro: 24px aparece en "background-size" y coincide con line-height (24px) para que el texto caiga sobre las líneas.
+   · Papel RAYADO: borra la segunda línea de background-image (la que empieza por linear-gradient(90deg...)).
+   · Papel LISO: borra todo el background-image. */
+.page{
+  background-color:var(--paper);
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:24px 24px; font-size:16px; line-height:24px;
+  padding:48px 28px 48px 60px; overflow-y:auto; scrollbar-width:thin;
+}
+/* Línea roja del margen (borra esta regla si no la quieres) */
+.page::before{content:""; position:absolute; top:0; bottom:0; left:44px; width:2px; background:var(--margin); opacity:.5}
+.recto{box-shadow:1px 0 0 #d6dccd,3px 1px 0 #c9d0bf}
+.verso{padding:48px 60px 48px 28px}
+.verso::before{left:auto; right:44px}
+.shade{position:absolute; inset:0; pointer-events:none}
+.recto .shade{background:linear-gradient(90deg,rgba(15,35,27,.25),transparent 9%)}
+.verso .shade{background:linear-gradient(270deg,rgba(15,35,27,.25),transparent 9%)}
+.folio{position:absolute; bottom:12px; font-family:var(--hand); font-size:20px; color:#4b5f55}
+.recto .folio{right:20px} .verso .folio{left:20px}
+
+/* Tapa · el degradado de "background" es el color de la tela; 60px es el tamaño de las esquinas de latón */
+.cover{
+  border-radius:4px 10px 10px 4px; color:var(--paper);
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 2px,transparent 2px 4px),linear-gradient(135deg,#27604d,var(--cover) 55%,#163a2f);
+  box-shadow:0 18px 30px -12px rgba(10,25,18,.55); display:flex; align-items:center; justify-content:center;
+}
+.cover::before,.cover::after{content:""; position:absolute; right:0; width:60px; height:60px; background:var(--brass)}
+.cover::before{top:0; clip-path:polygon(0 0,100% 0,100% 100%)}
+.cover::after{bottom:0; clip-path:polygon(100% 0,100% 100%,0 100%)}
+.hinge{position:absolute; left:0; top:0; bottom:0; width:18px; background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(0,0,0,.05))}
+/* Etiqueta de la portada: su texto se cambia en script.js (función coverHTML) */
+.label{
+  width:68%; background:var(--paper); color:var(--ink); border:3px double var(--brass);
+  padding:1.6rem 1rem; text-align:center; transform:rotate(-1.5deg);
+}
+.label h1{font-family:var(--display); font-weight:800; font-size:clamp(1.5rem,3.4vw,2.1rem); line-height:1.05; letter-spacing:-.02em; margin:0 0 .75rem}
+.label p{margin:0; font-family:var(--hand); font-size:1.5rem; line-height:1.2}
+.cover.empty-cover::before,.cover.empty-cover::after{opacity:.9}
+
+/* Contenido de página · tamaños de título (26px), texto (16px) y notas a mano (21px) */
+.head{display:flex; justify-content:space-between; font-size:14px; color:#4b5f55}
+.head b{font-weight:600; color:var(--ink)}
+.page h2{font-family:var(--display); font-weight:800; font-size:26px; line-height:30px; letter-spacing:-.02em; margin:12px 0 18px}
+.thumb{position:relative; aspect-ratio:16/8; border:1.5px solid var(--ink); margin:0 0 20px; background:var(--c)}
+.thumb img{width:100%; height:100%; object-fit:cover; display:block}
+.thumb::after{content:""; position:absolute; top:-11px; left:50%; width:74px; height:22px; background:rgba(176,141,87,.6); transform:translateX(-50%) rotate(-3deg)}
+/* Portadas generadas cuando un ejercicio no tiene captura: rayas (p0), puntos (p1) y cuadros (p2) */
+.p0{background:repeating-linear-gradient(135deg,var(--c) 0 12px,color-mix(in srgb,var(--c) 78%,#fff) 12px 24px)}
+.p1{background:radial-gradient(circle,rgba(255,255,255,.55) 3px,transparent 3.5px) 0 0/18px 18px,var(--c)}
+.p2{background:conic-gradient(var(--c) 25%,color-mix(in srgb,var(--c) 78%,#fff) 0 50%,var(--c) 0 75%,color-mix(in srgb,var(--c) 78%,#fff) 0) 0 0/32px 32px}
+.page p{margin:0 0 12px}
+.tags{display:flex; flex-wrap:wrap; gap:6px; list-style:none; padding:0; margin:0 0 14px}
+.tags li{font-size:13px; line-height:20px; padding:0 10px; border:1.5px solid var(--ink); border-radius:999px; background:var(--paper)}
+/* Nota "Qué aprendí" escrita a mano */
+.note{font-family:var(--hand); font-size:21px; line-height:24px; margin:0 0 16px}
+.note b{font-weight:700; background:linear-gradient(transparent 55%,rgba(176,141,87,.5) 55%)}
+.acts{display:flex; flex-wrap:wrap; gap:8px}
+.btn{
+  font:600 14px/1 var(--body); text-decoration:none; cursor:pointer; padding:9px 16px; border-radius:999px;
+  border:1.5px solid var(--cover); background:transparent; color:var(--cover);
+}
+.btn.solid,.btn:hover{background:var(--cover); color:var(--paper)}
+.btn:disabled{opacity:.4; cursor:default}
+.toc{list-style:none; padding:0; margin:0}
+.toc button{all:unset; box-sizing:border-box; width:100%; display:flex; align-items:baseline; cursor:pointer; min-height:48px; line-height:24px}
+.toc button:focus-visible{outline:3px solid var(--margin)}
+.toc i{flex:1; border-bottom:2px dotted var(--ink); opacity:.35; margin:0 8px; transform:translateY(-4px)}
+.toc button:hover span{background:linear-gradient(transparent 55%,rgba(176,141,87,.5) 55%)}
+.todo{font-family:var(--hand); font-size:22px; line-height:48px; list-style:none; padding:0; margin:0}
+.todo li::before{content:"☐ "}
+
+/* Controles (botones Anterior / Siguiente) */
+.controls{display:flex; align-items:center; gap:1rem}
+.controls span{min-width:9.5rem; text-align:center; font-size:.95rem}
+.controls .btn{background:var(--cover); color:var(--paper); padding:11px 20px}
+.controls .btn:disabled{opacity:.35}
+
+/* Móvil: por debajo de 760px se muestra una sola página. Si cambias este valor, cámbialo también en script.js (matchMedia) */
+@media (max-width:760px){
+  :root{--pw:min(88vw,400px); --ph:clamp(540px,78vh,640px)}
+  .book,.book.closed,.book.end{width:var(--pw); transform:none}
+  .leaf{left:0; width:100%}
+  .leaf.flipped{visibility:hidden; transition:transform var(--flip) var(--ease),z-index 0s calc(var(--flip)/2),visibility 0s var(--flip)}
+  .page{padding:44px 22px 44px 54px}
+  .page::before{left:38px}
+}
+@media (prefers-reduced-motion:reduce){
+  .book,.leaf{transition-duration:.01s !important; transition-delay:0s !important}
+}
