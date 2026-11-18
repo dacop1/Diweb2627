@@ -1,0 +1,30 @@
+h1 {
+    color: blue;
+    font-size: 30px;
+}
+
+p {
+    color: black;
+}
+
+
+
+/* 
+Cuestiones
+1.¿De qué color aparece el título?
+2.¿Qué tamaño tiene el título?
+3.¿De qué color aparece el primer párrafo?
+4.¿De qué color aparece el segundo párrafo?
+5.Modifica el HTML para que el título aparezca en negro utilizando un estilo en línea.
+6.Elimina los estilos internos. ¿Qué sucede con los colores? 
+
+1.En verde  estilos interno tiene prioridad sobre externa
+2.El tamaño es 30px
+3.El primer párrafo aparece de color naranja.
+4.Los estilos en línea tienen mayor prioridad que los internos y los externos.
+5.en negro estilo interno
+6. Título: azul (por estilos.css).
+Primer párrafo: negro (por estilos.css).
+Segundo párrafo: rojo (porque sigue teniendo estilo en línea).
+
+*/
