@@ -1,0 +1,31 @@
+p {
+    color: blue;
+}
+
+#contenedor {
+    border: 2px solid black;
+}
+
+.destacado {
+    background-color: yellow;
+}
+
+p.texto {
+    font-style: italic;
+}
+
+section p {
+    color: green;
+}
+
+button {
+    padding: 10px;
+}
+
+section > :first-child {
+    font-weight: bold;
+}
+
+p.texto.destacado {
+    color: red;
+}

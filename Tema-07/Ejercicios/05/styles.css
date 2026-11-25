@@ -1,0 +1,19 @@
+.producto {
+    padding: 20px;
+}
+
+.producto__titulo {
+    font-size: 24px;
+}
+
+.producto__texto {
+    color: gray;
+}
+
+.producto__boton {
+    padding: 10px;
+}
+
+.producto__boton--principal {
+    background-color: blue;
+}

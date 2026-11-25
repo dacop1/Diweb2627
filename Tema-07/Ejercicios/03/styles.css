@@ -1,0 +1,37 @@
+/* ID para el encabezado */
+#encabezado {
+    background-color: navy;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Elemento con dos clases: oferta y especial */
+.oferta.especial {
+    background-color: gold;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Clase común para todas las tarjetas */
+.tarjeta {
+    border: 1px solid black;
+    padding: 15px;
+    margin: 10px;
+}
+
+/* Clase modificadora para una tarjeta destacada */
+.tarjeta.destacada {
+    background-color: lightyellow;
+    border: 2px solid orange;
+}
+
+/* Clase para todos los botones */
+.boton {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+p {
+    color: blue;
+}
+
+.mensaje {
+    color: green;
+}
+
+p.destacado {
+    color: orange;
+}
+
+#principal p {
+    color: red;
+}
+
+.mensaje.destacado {
+    color: purple;
+}
